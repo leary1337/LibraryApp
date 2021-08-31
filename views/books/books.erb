@@ -1,0 +1,51 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12">
+    <h3>Список книг в библиотеке</h3>
+
+    <a href="/create-book" class="button">
+      Добавить
+    </a>
+
+    <a href="/" class="button secondary">
+      В главное меню
+    </a>
+  </div>
+
+  <div class="large-12 cell">
+    <p>Фильтры (выберите один нужный) :</p>
+    <% form({ method: :get },{ obj: @parameters }) do |f| %>
+      <div class="large-12 cell">
+        <%= f.input(:genre, type: :text, label: 'Жанр', placeholder: 'fiction') %>
+        <%= f.input(:date, type: :date, label: 'Дата (покажу книги, которые просрочены относительно указанной даты)', placeholder: '2021-10-08') %>
+      </div>
+
+      <div class="large-12 cell">
+        <%= f.button(value: 'Фильтровать', class: 'button') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="large-12 cell">
+    <p>Количество книг: <%= @books.size %> шт.</p>
+  </div>
+
+  <% if @books.size == 0 %>
+    <div class="cell large-12 callout warning">
+      В библиотеке книг нет
+    </div>
+  <% else%>
+    <% @books.each do |book| %>
+      <div class="card cell large-4">
+        <div class="card-divider">
+          <%= book.title %>
+        </div>
+        <div class="card-section">
+          <p><%= book.author %></p>
+          <p>
+            <a class="button" href="/book/<%= book.inventory_number %>">Информация о книге</a>
+          <p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

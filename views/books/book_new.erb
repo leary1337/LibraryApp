@@ -1,0 +1,48 @@
+<div class="grid-x grid-margin-x">
+  <h3>Добавление книги</h3>
+</div>
+
+<% if @is_not_uniq_key %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-12 cell callout warning">
+      Инвентарный номер должен быть уникальным
+    </div>
+  </div>
+<% end %>
+
+<% form({ method: :post },{ obj: @parameters }) do |f| %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-12 cell">
+      <%= f.input(:title, type: :text, label: 'Название книги', placeholder: 'Преступление и наказание')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:author, type: :text, label: 'Автор', placeholder: 'Достоевский Ф.М.')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:inventory_number, type: :text, label: 'Инвентаризационный номер', placeholder: '978-1-9343561-0-4')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:genre, type: :text, label: 'Жанр', placeholder: 'Роман')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:age_rating, type: :select, label: 'Возрастной рейтинг', options: BookAgeRatingType.all_types, add_blank: true)%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:books_in_stock, type: :text, label: 'Количество книг в библиотеке', placeholder: '100') %>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:books_out_of_stock, type: :text, label: 'Количество книг на руках', placeholder: '20') %>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.button(value: 'Добавить', class: 'button') %>
+      <a href="/books" class="button secondary">Отмена</a>
+    </div>
+  </div>
+<% end %>

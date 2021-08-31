@@ -1,0 +1,7 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12 warning">
+    Вы действительно хотите удалить книгу <%= @book.title %>?
+  </div>
+</div>
+
+<%= render('./_delete_form', locals: { back_location: "/book/#{@book.inventory_number}" }) %>

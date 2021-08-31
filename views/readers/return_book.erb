@@ -1,0 +1,23 @@
+<div class="grid-x grid-margin-x">
+
+  <% if @penalty.nil? %>
+    <div class="cell large-12">
+      <%= render('./_book_info') %>
+    </div>
+
+    <div class="cell large-12">
+      <% form({ method: :post },{ obj: @parameters }) do |f| %>
+        <%= f.input(:return_date, type: :date, label: 'Фактическая дата возврата', placeholder: '20.05.2021')%>
+        <%= f.button(value: 'Вернуть книгу', class: 'button') %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="cell large-12">
+      Книга успешно возвращена, штраф составил: <%= @penalty %> руб.
+    </div>
+  <% end %>
+
+  <div class="cell large-12">
+    <a class="button secondary" href="/reader/<%= @reader.id %>">Назад к читателю</a>
+  </div>
+</div>

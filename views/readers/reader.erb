@@ -1,0 +1,36 @@
+<div class="grid-x grid-margin-x">
+  <div class="cell large-12">
+    <h3>Информация о читателе</h3>
+  </div>
+
+  <div class="cell large-12">
+    <p>ФИО: <%= @reader.full_name %></p>
+    <p>Дата рождения: <%= @reader.date_of_birth %></p>
+    <p>Список взятых книг:</p>
+    <% if @books_of_reader.nil? || @books_of_reader.size == 0 %>
+      <p>Читатель не брал ни одной книги</p>
+    <% else %>
+      <table>
+        <thead>
+        <tr>
+          <th>Инвентаризационнный номер</th>
+          <th>Дата возврата</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @books_of_reader.each do |book_id, date| %>
+          <tr>
+            <td><a href="/reader/<%= @reader.id %>/<%= book_id %>"><%= book_id %></a></td>
+            <td><%= date %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <a class="button" href="/list-books/<%= @reader.id %>">Подобрать книгу</a>
+    <a class="button warning" href="/delete-reader?reader_id=<%= @reader.id %>">Удалить</a>
+    <a class="button secondary" href="/readers">Назад к списку читателей</a>
+  </div>
+</div>

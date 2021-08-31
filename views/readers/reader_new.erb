@@ -1,0 +1,20 @@
+<div class="grid-x grid-margin-x">
+  <h3>Добавление читателя</h3>
+</div>
+
+<% form({ method: :post },{ obj: @parameters }) do |f| %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-12 cell">
+      <%= f.input(:full_name, type: :text, label: 'ФИО', placeholder: 'Изюмов Тимофей Игнатьевич')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.input(:date_of_birth, type: :date, label: 'Дата рождения', placeholder: '20.05.1976')%>
+    </div>
+
+    <div class="large-12 cell">
+      <%= f.button(value: 'Добавить', class: 'button') %>
+      <a href="/books" class="button secondary">Отмена</a>
+    </div>
+  </div>
+<% end %>

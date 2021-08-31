@@ -1,0 +1,46 @@
+<div class="grid-x grid-margin-x">
+  <h3>Подбор книги</h3>
+</div>
+
+<% form({ method: :get },{ obj: @parameters }) do |f| %>
+  <div class="grid-x grid-margin-x">
+    <div class="large-6 cell">
+      <%= f.input(:genre, type: :select, label: 'Жанр', options: @all_genres, add_blank: true)%>
+    </div>
+
+    <div class="large-6 cell">
+      <%= f.input(:author, type: :select, label: 'Автор', options: @all_authors, add_blank: true)%>
+    </div>
+
+    <div class="large-4 cell">
+      <%= f.button(value: 'Показать книги', class: 'button') %>
+      <a href="/reader/<%= @reader.id %>" class="button secondary">Назад к читателю</a>
+    </div>
+  </div>
+<% end %>
+
+<% if (@parameters[:genre] && !@parameters[:genre].empty?) || (@parameters[:author] && !@parameters[:author].empty?) %>
+  <% if @books.size == 0 %>
+    <div class="grid-x grid-margin-x">
+      <div class="cell large-12 callout">
+        По заданным параметрам книг не найдено
+      </div>
+    </div>
+  <% else %>
+    <div class="grid-x grid-margin-x">
+      <% @books.each do |book| %>
+        <div class="card cell large-4">
+          <div class="card-divider">
+            <%= book.title %>
+          </div>
+          <div class="card-section">
+            <p><%= book.author %></p>
+            <p>
+              <a class="button" href="/give-book/<%= @reader.id %>/<%= book.inventory_number %>">Выдать книгу</a>
+            <p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="grid-x grid-margin-x">
+  <div class="large-12 cell">
+    <h3>Выдача книги</h3>
+    <p>Для того, чтобы выдать книгу укажите дату возврата</p>
+  </div>
+
+  <% unless @is_available_in_stock %>
+    <div class="large-12 cell callout warning">
+      Данной книги нет в наличии
+    </div>
+  <% end %>
+
+  <div class="large-12 cell">
+    <% form({ method: :post },{ obj: @parameters }) do |f| %>
+      <%= f.input(:return_date, type: :date, label: 'Дата возврата')%>
+      <%= f.button(value: 'Выдать книгу', class: 'button') %>
+      <a href="/list-books/<%= @reader.id %>" class="button secondary">Назад к подбору книг</a>
+    <% end %>
+  </div>
+</div>
